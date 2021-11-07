@@ -10,6 +10,7 @@ set(SFML_LIBRARY_DIR "./SFML/build/lib")
 add_executable(
   ${PROJECT_NAME}
   main.cpp
+  player.cpp
 )
 
 link_directories(SFML_LIBRARY_DIR)
