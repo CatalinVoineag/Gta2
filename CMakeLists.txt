@@ -11,6 +11,7 @@ add_executable(
   ${PROJECT_NAME}
   main.cpp
   player.cpp
+  world.cpp
 )
 
 link_directories(SFML_LIBRARY_DIR)
