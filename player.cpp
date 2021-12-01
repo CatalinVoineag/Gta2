@@ -16,7 +16,22 @@ void Player::spawn(IntRect world, Vector2f resolution) {
 }
 
 void Player::update(float elapsedTime, Vector2i mousePosition) {
-  m_Sprite.setPosition(m_Position);
+	if (m_UpPressed) {
+		m_Position.y -= m_Speed * elapsedTime;
+	}
+
+	if (m_DownPressed) {
+		m_Position.y += m_Speed * elapsedTime;
+	}
+
+	if (m_RightPressed) {
+		m_Position.x += m_Speed * elapsedTime;
+	}
+
+	if (m_LeftPressed) {
+		m_Position.x -= m_Speed * elapsedTime;
+	}
+
 
 	float angle = atan2(
     mousePosition.y - m_Resolution.y / 2,
@@ -29,6 +44,7 @@ void Player::update(float elapsedTime, Vector2i mousePosition) {
   }
 
   m_Sprite.setRotation(angle);
+  m_Sprite.setPosition(m_Position);
 }
 
 Sprite Player::getSprite() {
@@ -37,4 +53,36 @@ Sprite Player::getSprite() {
 
 Vector2f Player::getCenter() {
   return m_Position;
+}
+
+void Player::moveLeft() {
+	m_LeftPressed = true;
+}
+
+void Player::moveRight() {
+	m_RightPressed = true;
+}
+
+void Player::moveUp() {
+	m_UpPressed = true;
+}
+
+void Player::moveDown() {
+	m_DownPressed = true;
+}
+
+void Player::stopLeft() {
+	m_LeftPressed = false;
+}
+
+void Player::stopRight() {
+	m_RightPressed = false;
+}
+
+void Player::stopUp() {
+	m_UpPressed = false;
+}
+
+void Player::stopDown() {
+	m_DownPressed = false;
 }

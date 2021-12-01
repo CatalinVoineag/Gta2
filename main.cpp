@@ -57,6 +57,8 @@ int main() {
 
   createBackground(background, world);
 
+  bool spawned = false;
+
   while(window.isOpen()) {
     Event event;
 
@@ -68,7 +70,34 @@ int main() {
       }
     }
 
-    player.spawn(world, resolution);
+    if (Keyboard::isKeyPressed(Keyboard::W)) {
+      player.moveUp();
+    } else {
+      player.stopUp();
+    }
+
+    if (Keyboard::isKeyPressed(Keyboard::S)) {
+      player.moveDown();
+    } else {
+      player.stopDown();
+    }
+
+    if (Keyboard::isKeyPressed(Keyboard::A)) {
+      player.moveLeft();
+    } else {
+      player.stopLeft();
+    }
+
+    if (Keyboard::isKeyPressed(Keyboard::D)) {
+      player.moveRight();
+    } else {
+      player.stopRight();
+    }
+
+    if (spawned == false) {
+      player.spawn(world, resolution);
+      spawned = true;
+    }
 
     // Update the frame
     Time dt = clock.restart();
