@@ -2,15 +2,18 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Window.hpp>
 #include "player.h"
+#include "world.h"
 #include <cmath>
 #include <iostream>
+
+using std::cout;
+using std::endl;
+using std::size;
 
 using namespace sf;
 
 int main() {
-  IntRect world;
-  world.width = 1000;
-  world.height = 1000;
+  IntRect world = setWorldSize();
 
 	Vector2f resolution;
 	resolution.x = VideoMode::getDesktopMode().width;
@@ -42,6 +45,17 @@ int main() {
   Texture textureCrosshair;
   textureCrosshair.loadFromFile("graphics/crosshair.png");
   spriteCrosshair.setTexture(textureCrosshair);
+
+  // Game Tile Texture
+  Texture horizontalRoadTexture;
+  horizontalRoadTexture.loadFromFile("graphics/streetTileTexture.png");
+
+  // Create background Vertex array
+  VertexArray background;
+  background.setPrimitiveType(Quads);
+  background.resize(widthTiles * heightTiles * 4);
+
+  createBackground(background, world);
 
   while(window.isOpen()) {
     Event event;
@@ -84,6 +98,8 @@ int main() {
 
     window.setView(mainView);
 
+    window.draw(background, &horizontalRoadTexture);
+
     window.draw(player.getSprite());
     window.draw(spriteCrosshair);
 
@@ -92,3 +108,4 @@ int main() {
 
   return 0;
 }
+
