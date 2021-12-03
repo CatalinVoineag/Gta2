@@ -1,11 +1,15 @@
 #include "player.h"
 #include <cmath>
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 Player::Player() {
   m_Texture.loadFromFile("graphics/player_character_idle.png");
   m_Sprite.setTexture(m_Texture);
 
-  m_Sprite.setOrigin(25.5, 37.5);
+  m_Sprite.setOrigin(m_Width / 2, m_Height / 2);
 }
 
 void Player::spawn(IntRect world, Vector2f resolution) {
@@ -13,6 +17,7 @@ void Player::spawn(IntRect world, Vector2f resolution) {
   m_Position.y = world.height / 2;
 
   m_Resolution = resolution;
+  m_World = world;
 }
 
 void Player::update(float elapsedTime, Vector2i mousePosition) {
@@ -32,6 +37,20 @@ void Player::update(float elapsedTime, Vector2i mousePosition) {
 		m_Position.x -= m_Speed * elapsedTime;
 	}
 
+  m_Sprite.setPosition(m_Position);
+
+  // Keep player within the world
+  if (m_Position.y > m_World.height) {
+    m_Position.y = m_World.height;
+    cout << "stop" << endl;
+  }
+
+  if (m_Position.y < m_World.top) {
+    cout << m_Position.y << endl;
+  }
+
+    cout << m_Position.y << endl;
+    cout << m_World.height << endl;
 
 	float angle = atan2(
     mousePosition.y - m_Resolution.y / 2,
@@ -44,7 +63,6 @@ void Player::update(float elapsedTime, Vector2i mousePosition) {
   }
 
   m_Sprite.setRotation(angle);
-  m_Sprite.setPosition(m_Position);
 }
 
 Sprite Player::getSprite() {
