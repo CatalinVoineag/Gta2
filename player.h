@@ -27,6 +27,8 @@ class Player {
 
     Sprite getSprite();
 
+    void setSprite(Texture texture);
+
     Vector2f getCenter();
 
     void moveLeft();

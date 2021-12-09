@@ -96,6 +96,9 @@ int main() {
 
     if (spawned == false) {
       player.spawn(world, resolution);
+      Texture texture;
+      texture.loadFromFile("graphics/blood.png");
+      player.setSprite(texture);
       spawned = true;
     }
 

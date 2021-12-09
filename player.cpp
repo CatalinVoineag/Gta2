@@ -40,17 +40,17 @@ void Player::update(float elapsedTime, Vector2i mousePosition) {
   m_Sprite.setPosition(m_Position);
 
   // Keep player within the world
+  if (m_Position.x < m_World.left) {
+    m_Position.x = m_World.left;
+  }
+
   if (m_Position.y > m_World.height) {
     m_Position.y = m_World.height;
-    cout << "stop" << endl;
   }
 
-  if (m_Position.y < m_World.top) {
-    cout << m_Position.y << endl;
+  if (m_Position.y < (m_World.top + 256)) {
+    m_Position.y = m_World.top + 256;
   }
-
-    cout << m_Position.y << endl;
-    cout << m_World.height << endl;
 
 	float angle = atan2(
     mousePosition.y - m_Resolution.y / 2,
@@ -67,6 +67,10 @@ void Player::update(float elapsedTime, Vector2i mousePosition) {
 
 Sprite Player::getSprite() {
   return m_Sprite;
+}
+
+void Player::setSprite(Texture texture) {
+  m_Sprite.setTexture(m_Texture);
 }
 
 Vector2f Player::getCenter() {

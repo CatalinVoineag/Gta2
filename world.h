@@ -4,7 +4,7 @@
 using namespace sf;
 using std::size;
 
-const  char map[4][9] = {
+const char map[4][9] = {
   {'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x'},
   {'p', '-', '-', '-', '-', 'n', 'x', 'x', 'x'},
   {'|', 'o', 'o', 'o', 'o', '|', 'x', 'x', 'x'},
@@ -12,7 +12,7 @@ const  char map[4][9] = {
 };
 
 const int widthTiles = size(map[0]);
-const  int heightTiles = size(map);
+const int heightTiles = size(map);
 
 void createBackground(VertexArray& backround, IntRect world);
 
