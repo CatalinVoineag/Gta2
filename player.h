@@ -27,7 +27,7 @@ class Player {
 
     Sprite getSprite();
 
-    void setSprite(Texture texture);
+    void setSprite(String TexturePath);
 
     Vector2f getCenter();
 

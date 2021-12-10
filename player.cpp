@@ -69,8 +69,11 @@ Sprite Player::getSprite() {
   return m_Sprite;
 }
 
-void Player::setSprite(Texture texture) {
+void Player::setSprite(String texturePath) {
+  m_Texture.loadFromFile("graphics/playerSpriteSheet.png", IntRect(0, 265, 265, 265));
   m_Sprite.setTexture(m_Texture);
+
+  m_Sprite.setOrigin(m_Width / 2, m_Height / 2);
 }
 
 Vector2f Player::getCenter() {
